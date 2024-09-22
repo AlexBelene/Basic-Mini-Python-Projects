@@ -132,58 +132,139 @@ choice = input("Enter the number of your choice (1-4): ")
 
 # If the user chooses Strings (choice == '1'):
 if choice == '1':
-    # Declare a string variable, e.g., sentence = "Learning Python is fun!"
-    
-    # Extract and print a substring, such as the word "Python" from the sentence.
-    
-    # Convert the entire sentence to uppercase and print it.
-    
-    # Replace a word in the sentence (e.g., replace "fun" with "awesome") and print the modified sentence.
+# Declare a string variable, e.g., sentence = "Learning Python is fun!"
+   sentence = 'Learning Python is fun!'
+
+# Extract and print a substring, such as the word "Python" from the sentence.
+   words = sentence.split()
+   print(words[2])
+
+# Convert the entire sentence to uppercase and print it.
+   upper_sentence = sentence.upper()
+
+# Replace a word in the sentence (e.g., replace "fun" with "awesome") and print the modified sentence.
+   new_sentence = sentence.replace('fun', 'awesome')
 
 # If the user chooses Numbers (choice == '2'):
 elif choice == '2':
-    # Prompt the user to input two numbers, e.g., num1 and num2.
-    
-    # Perform and print the results of addition, subtraction, multiplication, and division.
-    
-    # Handle division by zero (e.g., print an error message if num2 is zero).
-    
-    # Perform a power operation, raising num1 to the power of num2, and print the result.
+# Prompt the user to input two numbers, e.g., num1 and num2.
+  num1 = int()
+  num2 = int()
+
+# Perform and print the results of addition, subtraction, multiplication, and division.
+  print(f'{num1 + num2} adding both numbers')
+  print(f'{num1 - num2} subtracting both numbers')
+  print(f'{num1 * num2} multiplying both numbers')
+  print(f'{num1 / num2} dividing both numbers')
+
+# Handle division by zero (e.g., print an error message if num2 is zero).
+  if num2 == 0:
+     print("Error: Division by zero is not allowed.")
+
+# Perform a power operation, raising num1 to the power of num2, and print the result.
+  power_operation = pow(num1, num2)
+  print(f'{power_operation} raised num1 to the power of num2')
 
 # If the user chooses Booleans (choice == '3'):
 elif choice == '3':
-    # Declare two boolean variables, e.g., is_python_fun = True, is_sunny = False.
-    
-    # Perform and print the results of logical operations: AND, OR, NOT.
-    
-    # Perform and print the results of comparison operations (e.g., 10 > 5 and 5 == 5).
+# Declare two boolean variables, e.g., is_python_fun = True, is_sunny = False.
+  is_python_fun = True
+  is_sunny = False
+
+# Perform and print the results of logical operations: AND, OR, NOT.
+  # Logical AND
+  and_result = is_python_fun and is_sunny
+  print(f"AND Operation: {is_python_fun} AND {is_sunny} = {and_result}")
+
+  # Logical OR
+  or_result = is_python_fun or is_sunny
+  print(f"OR Operation: {is_python_fun} OR {is_sunny} = {or_result}")
+
+ # Logical NOT
+  not_python_result = not is_python_fun
+  not_sunny_result = not is_sunny
+  print(f"NOT Operation: NOT {is_python_fun} = {not_python_result}")
+  print(f"NOT Operation: NOT {is_sunny} = {not_sunny_result}")
+
+# Perform and print the results of comparison operations (e.g., 10 > 5 and 5 == 5).
+  comparison_result_1 = 10 > 5
+  print(f"Comparison 1 Operation: 10 > 5 = {comparison_result_1}")
+  comparison_result_2 = 5 == 5
+  print(f"Comparison 2 Operation: 5 == 5 = {comparison_result_2}")
+
+# Perform and print the results of comparison operations with different data types (e.g., 10 > '5' and 5 == '5').
+  comparison_result_3 = 10 > int('5')
+  print(f"Comparison 3 Operation: 10 > 5 = {comparison_result_3}")
+  comparison_result_4 = 5 == int('5')
+  print(f"Comparison 4 Operation: 5 == 5 = {comparison_result_4}")
 
 # If the user chooses Additional Data Types (choice == '4'):
 elif choice == '4':
-    # ### List Operations ###
-    # Create a list with mixed data types (e.g., numbers, strings, booleans).
-    
-    # Append a new element to the list and print the updated list.
-    
-    # Access and print the 4th element in the list.
-    
-    # ### Tuple Operations ###
-    # Create a tuple with some string elements (e.g., fruits).
-    
-    # Print the length of the tuple.
-    
-    # Try to modify one element in the tuple and handle the resulting TypeError.
-    
-    # ### Dictionary Operations ###
-    # Create a dictionary with some key-value pairs (e.g., name, age, city).
-    
-    # Access and print the value for one of the keys (e.g., "age").
-    
-    # Add a new key-value pair to the dictionary and print the updated dictionary.
+# ### List Operations ###
+# Create a list with mixed data types (e.g., numbers, strings, booleans).
+  mixed_data_list = [1,5,10,'One','Five','Ten',False,True]
+  print(mixed_data_list)
+
+# Append a new element to the list and print the updated list.
+  mixed_data_list.append('Eleven')
+  print(mixed_data_list)
+
+# Access and print the 4th element in the list.
+  print(mixed_data_list[3])
+
+# ### Tuple Operations ###
+# Create a tuple with some string elements (e.g., fruits).
+  tuple_fruits = ('orange','apple','watermelon','grape','peach')
+  print(tuple_fruits)
+
+# Print the length of the tuple.
+  print(len(tuple_fruits))
+
+# Try to modify one element in the tuple and handle the resulting TypeError.
+# workaround change the tuple into a list and then revert
+  tuple_list = list(tuple_fruits)
+  tuple_list.append('orange')
+  print(tuple_list)
+
+  tuple_list = tuple(tuple_list)
+  print(tuple_list)
+
+
+# ### Dictionary Operations ###
+# Create a dictionary with some key-value pairs (e.g., name, age, city).
+  person_info = {
+    'John':
+  {
+    'age':25,
+    'city':'Los Angeles'
+  },
+     'Ivan':
+  {
+    'age': 18,
+    'city': 'Meden Rudnik'
+  },
+    'Penka':
+  {
+    'age': 16,
+    'city': 'Burgas'
+  }
+  }
+
+# Access and print the value for one of the keys (e.g., "age").
+  print(person_info['Ivan']['city'])
+  print(person_info['Ivan']['age'])
+
+# Add a new key-value pair to the dictionary and print the updated dictionary.
+  person_info['Peter'] = {
+    'age': 22,
+    'city': 'Pleven'
+  }
+  print(person_info)
 
 # If the user enters an invalid choice:
 else:
-    # Print an error message indicating an invalid selection.
+# Print an error message indicating an invalid selection.
+  print('Please selection. Please enter a valid choice [1-4]!')
 
 ```
 

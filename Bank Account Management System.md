@@ -69,116 +69,132 @@ loans = []  # List to store outstanding loans for each account
 MAX_LOAN_AMOUNT = 10000  # Maximum loan amount
 INTEREST_RATE = 0.03  # Interest rate for loans
 
+
 def create_account():
-    """Create a new bank account."""
-    # 1. Prompt the user for the account holder's name.
-    # 2. Add the new account holder to the list of account holders.
-    # 3. Initialize the balance to 0 for the new account.
-    # 4. Initialize an empty transaction history for the new account.
-    # 5. Initialize the outstanding loan amount to 0.
-    # 6. Notify the user of the successful account creation.
+
+ acc_name = input('New account name:')
+ account_holders.append(acc_name)
+ balances.append(0)
+ transaction_histories.append(0)
+ loans.append(0)
+ print(f'Account successfully created!')
+                                        
+ print(f'Your index is:{account_holders.index(acc_name)} ')
 
 def deposit():
-    """Deposit money into an account."""
-    # 1. Prompt the user for the account holder's name.
-    # 2. Check if the account exists in the system.
-    # 3. If the account exists, prompt the user for the amount to deposit.
-    # 4. Update the account's balance with the deposited amount.
-    # 5. Log the transaction in the account's transaction history.
-    # 6. Display the updated balance to the user.
-    # 7. If the account does not exist, inform the user.
+
+ acc_name = input('Enter Account name:')
+ if acc_name in account_holders:
+     deposit_amount = float(input('Enter deposit amount:'))
+     balances[account_holders.index(acc_name)] += deposit_amount
+     print(f'You\'r new balance is: {balances[account_holders.index(acc_name)]}')
+     transaction_histories[account_holders.index(acc_name)] += 1
+ else:
+    print('Account does not exist!')
 
 def withdraw():
-    """Withdraw money from an account."""
-    # 1. Prompt the user for the account holder's name.
-    # 2. Check if the account exists in the system.
-    # 3. If the account exists, prompt the user for the amount to withdraw.
-    # 4. Check if there are sufficient funds for the withdrawal.
-    # 5. If funds are sufficient, update the balance and log the transaction.
-    # 6. Display the updated balance to the user.
-    # 7. If insufficient funds, inform the user.
-    # 8. If the account does not exist, inform the user.
+
+   acc_name = input('Enter Account name:')
+   if acc_name in account_holders:
+      withdraw_amount = float(input('Enter withdraw amount:'))
+      if withdraw_amount <= balances[account_holders.index(acc_name)]:
+         balances[account_holders.index(acc_name)] -= withdraw_amount
+         print(f'You\'r new balance is: {balances[account_holders.index(acc_name)]}')
+         transaction_histories[account_holders.index(acc_name)] += 1
+
+   else:
+      print('Account does not exist!')
+
 
 def check_balance():
-    """Check the balance of an account."""
-    # 1. Prompt the user for the account holder's name.
-    # 2. Check if the account exists in the system.
-    # 3. If the account exists, display the current balance.
-    # 4. If the account does not exist, inform the user.
+
+    acc_name = input('Enter Account name:')
+    if acc_name in account_holders:
+        print(f'You\'r new balance is: {balances[account_holders.index(acc_name)]}')
+    else:
+       print('Account does not exist!')
 
 def list_accounts():
-    """List all accounts and their balances."""
-    # 1. Check if there are any accounts in the system.
-    # 2. If there are accounts, loop through each account holder.
-    # 3. Display the account holder's name, balance, and outstanding loan amount.
-    # 4. If there are no accounts, inform the user.
+
+   if account_holders:
+      for account in range(len(account_holders)):
+          print(f'{account_holders[account]}\n '
+                f'Has a balance of: {balances[account]}\n '
+                f'Has a loan of: {loans[account]}')
+   else:
+       print(f'There are no accounts registered!')
 
 def transfer_funds():
-    """Transfer funds between two accounts."""
-    # 1. Prompt the user for the sender's and recipient's account holder names.
-    # 2. Check if both accounts exist in the system.
-    # 3. If both accounts exist, prompt the user for the amount to transfer.
-    # 4. Check if the sender has sufficient funds for the transfer.
-    # 5. If funds are sufficient, update both balances and log the transactions.
-    # 6. Inform the user of the successful transfer.
-    # 7. If insufficient funds or if either account does not exist, inform the user.
+
+   sender = input()
+   recipient = input()
+   if sender and recipient in account_holders:
+      transfer_amount = float(input('Enter the transfer amount:'))
+      if transfer_amount <= balances[account_holders.index(sender)]:
+         balances[account_holders.index(sender)] -= transfer_amount
+         balances[account_holders.index(recipient)] += transfer_amount
+         print(f'{transfer_amount} successfully transferred to {recipient}.')
+         transaction_histories[account_holders.index(sender)] += 1
+         transaction_histories[account_holders.index(recipient)] += 1
+      else:
+          print(f'Incufficient funds to transfer')
+   else:
+       print(f'Not a valid sender or recipient account!')
 
 def view_transaction_history():
-    """View transaction history for a specific account."""
-    # 1. Prompt the user for the account holder's name.
-    # 2. Check if the account exists in the system.
-    # 3. If the account exists, display the transaction history.
-    # 4. If there are no transactions, inform the user.
-    # 5. If the account does not exist, inform the user.
+
+    acc_name = input('Enter Account name:')
+    if acc_name in account_holders:
+        index = account_holders.index(acc_name)
+        if transaction_histories[index] == 0:
+            print(f'There have been 0 transactions for {acc_name}!')
+        else:
+            print(f'The transaction history of {acc_name} is {transaction_histories[index]}')
+        print('Account does not exist!')
 
 def apply_for_loan():
-    """Apply for a loan."""
     name = input("Enter the account holder's name: ")
-    
-    # Check if the account exists in the system
+
     if name in account_holders:
-        index = account_holders.index(name)  # Find the account index
-        
-        # Prompt user for the loan amount they wish to apply for
+        index = account_holders.index(name)
+
+
         loan_amount = float(input(f"Enter the loan amount (max {MAX_LOAN_AMOUNT} leva): "))
-        
-        # Check if the loan amount is within the limit
+
+
         if loan_amount <= MAX_LOAN_AMOUNT:
-            # Update balance and loan amount
+
             balances[index] += loan_amount
-            loans[index] += loan_amount * (1 + INTEREST_RATE)  # Calculate total loan with interest
-            
+            loans[index] += loan_amount * (1 + INTEREST_RATE)
+
             print(f"Loan of {loan_amount:.2f} leva approved for {name}. New balance: {balances[index]:.2f} leva.")
         else:
             print(f"Loan amount exceeds maximum limit of {MAX_LOAN_AMOUNT} leva.")
     else:
         print("Account not found.")
 
+
 def repay_loan():
-    """Repay a loan."""
     name = input("Enter the account holder's name: ")
-    
-    # Check if the account exists in the system
+
     if name in account_holders:
-        index = account_holders.index(name)  # Find the account index
-        
-        # Prompt user for repayment amount
+        index = account_holders.index(name)
+
         repayment_amount = float(input(f"Enter repayment amount (Outstanding loan: {loans[index]:.2f} leva): "))
-        
-        # Check if the repayment amount is valid
+
         if repayment_amount <= loans[index]:
-            # Update balance and outstanding loan amount
             balances[index] -= repayment_amount
             loans[index] -= repayment_amount
-            
-            print(f"Repayment of {repayment_amount:.2f} leva accepted for {name}. Remaining loan: {loans[index]:.2f} leva.")
+
+            print(
+                f"Repayment of {repayment_amount:.2f} leva accepted for {name}. Remaining loan: {loans[index]:.2f} leva.")
         else:
             print("Repayment amount exceeds outstanding loan.")
     else:
         print("Account not found.")
 
+
 def display_menu():
-    """Display the main menu."""
     print("\n--- Bank Account Management System ---")
     print("1. Create Account")
     print("2. Deposit")
@@ -190,17 +206,15 @@ def display_menu():
     print("8. Apply for Loan")
     print("9. Repay Loan")
     print("10. Exit")
-    
-    # Prompt user for their choice
+
     choice = int(input("Enter your choice: "))
     return choice
 
+
 def main():
-    """Main function to run the banking system."""
     while True:
-        choice = display_menu()  # Display the menu and get user choice
-        
-        # Process user input based on their choice
+        choice = display_menu()
+
         if choice == 1:
             create_account()
         elif choice == 2:
@@ -221,34 +235,12 @@ def main():
             repay_loan()
         elif choice == 10:
             print("Exiting the system. Goodbye!")
-            break  # Exit the loop and terminate the program
+            break
         else:
             print("Invalid choice. Please try again.")
+
+main()
 ```
 
 ## 📌 Prerequisites
 Python 3.x installed on your system.
-
-## 📦 Running the Project
-Clone the repository or download the code files.
-
-Run the script using Python:
-
-```python
-python bank_system.py
-```
-
-## 👨‍🏫 Instructions for Students
-Fill in the logic for each hidden function based on the comments provided.
-
-Use Python lists to manage account data effectively.
-
-Implement error handling to manage user inputs and maintain data integrity.
-
-## 🎉 Wish for Students
-
-Wishing you all the best on your coding journey! 
-
-🌟 Keep exploring, experimenting, and enjoy the process of learning! 
-
-🚀💻 Remember, every line of code brings you closer to mastery! 🙌✨
